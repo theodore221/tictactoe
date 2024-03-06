@@ -61,11 +61,12 @@ function Board({ xIsNext, squares, onPlay, currentMove }) {
 
   return (
     <>
-      <div className="status">
+      {/* TODO: Re-add the status back in within Game component */}
+      {/* <div className="status">
         {status}
         <br></br>
         {moveInfo}
-      </div>
+      </div> */}
       <div className="board-grid">
         <div className="board-row">
           <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
@@ -145,20 +146,23 @@ export default function Game() {
 
   return (
     <>
-      <div className="title">
-        <h1>THE FANTAS-TIC TAC TOE</h1>
-      </div>
-      <div className="game">
-        <div className="game-board">
-          <Board
-            currentMove={currentMove}
-            xIsNext={xIsNext}
-            squares={currentSquares}
-            onPlay={handlePlay}
-          />
+      <div className="game__container">
+        <div className="title">
+          <h1>THE FANTAS-TIC TAC TOE</h1>
         </div>
-        <div className="game-info">
-          <ol>{moves}</ol>
+        <div className="game">
+          <div className="game-board">
+            <Board
+              currentMove={currentMove}
+              xIsNext={xIsNext}
+              squares={currentSquares}
+              onPlay={handlePlay}
+            />
+          </div>
+          {/* TODO: Re-add history button to take back moves but make it look more intersting */}
+          <div className="game-info">
+            <ol>{moves}</ol>
+          </div>
         </div>
       </div>
     </>
