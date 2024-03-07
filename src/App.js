@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
+  const style =
+    value === 'X' ? 'square x' : value === 'O' ? 'square o' : 'square';
+
   return (
-    <button onClick={onSquareClick} className="square">
+    <button onClick={onSquareClick} className={style}>
       {value}
     </button>
   );
@@ -17,9 +20,9 @@ function Board({ xIsNext, squares, onPlay, currentMove }) {
     const nextSquares = squares.slice();
 
     if (xIsNext) {
-      nextSquares[i] = "X";
+      nextSquares[i] = 'X';
     } else {
-      nextSquares[i] = "O";
+      nextSquares[i] = 'O';
     }
     onPlay(nextSquares);
   }
@@ -27,46 +30,25 @@ function Board({ xIsNext, squares, onPlay, currentMove }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    status = 'Winner: ' + winner;
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   }
 
-  let moveInfo = "You are at move # " + (currentMove + 1);
-
-  // function createGrid() {
-  //   const rows = 3;
-  //   const cols = 3;
-  //   let grid = [];
-  //   let count = 0;
-
-  //   for (let i = 0; i < rows; i++) {
-  //     let row = [];
-  //     for (let j = 0; j < cols; j++) {
-  //       row.push(`
-  //         <Square
-  //           value={squares[+${count}]}
-  //           onSquareClick={() => handleClick(+${count})}
-  //         />
-  //       `);
-  //       count++;
-  //     }
-  //     grid.push(`<div className="board-row">${row}</div>`);
-  //   }
-  //   return grid;
-  // }
-
-  // let test = createGrid();
-  // console.log(test);
+  let moveInfo = 'You are at move # ' + (currentMove + 1);
+  console.log(winner);
+  let stateStyle = winner ? 'status ' + winner : 'status';
+  stateStyle = stateStyle.toLowerCase();
+  console.log(stateStyle);
 
   return (
     <>
       {/* TODO: Re-add the status back in within Game component */}
-      {/* <div className="status">
+      <div className={stateStyle}>
         {status}
         <br></br>
-        {moveInfo}
-      </div> */}
+        {/* {moveInfo} */}
+      </div>
       <div className="board-grid">
         <div className="board-row">
           <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
@@ -127,22 +109,50 @@ export default function Game() {
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
     // setXIsNext(nextMove % 2 === 0);
+    const nextHistory = [...history.slice(0, currentMove + 1)];
+    setHistory(nextHistory);
+    moves = history.map((squares, move) => {
+      let description;
+      if (move > 0) {
+        description = '#' + move + '.';
+      } else {
+        description = 'Go to game Start';
+      }
+
+      return (
+        <li key={move}>
+          <button className="history__btn" onClick={() => jumpTo(move)}>
+            {description}
+          </button>
+        </li>
+      );
+    });
   }
 
-  const moves = history.map((squares, move) => {
+  function reset() {
+    setCurrentMove(0);
+    setHistory([Array(9).fill(null)]);
+    moves = [null];
+  }
+
+  let moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = "Go to move #" + move;
+      description = '#' + move + '.';
     } else {
-      description = "Go to game Start";
+      description = 'Go to game Start';
     }
 
     return (
       <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
+        <button className="history__btn" onClick={() => jumpTo(move)}>
+          {description}
+        </button>
       </li>
     );
   });
+
+  moves = moves.slice(1);
 
   return (
     <>
@@ -151,17 +161,26 @@ export default function Game() {
           <h1>THE FANTAS-TIC TAC TOE</h1>
         </div>
         <div className="game">
-          <div className="game-board">
-            <Board
-              currentMove={currentMove}
-              xIsNext={xIsNext}
-              squares={currentSquares}
-              onPlay={handlePlay}
-            />
+          <div className="game__row1">
+            <div className="game-board">
+              <Board
+                currentMove={currentMove}
+                xIsNext={xIsNext}
+                squares={currentSquares}
+                onPlay={handlePlay}
+              />
+            </div>
+            {/* TODO: Re-add history button to take back moves but make it look more intersting */}
+            {/* <div className="game-info">
+              <ul className="history">{moves}</ul>
+            </div> */}
           </div>
-          {/* TODO: Re-add history button to take back moves but make it look more intersting */}
-          <div className="game-info">
-            <ol>{moves}</ol>
+          <div className="game__row2">
+            <div className="reset">
+              <button className="reset__btn" onClick={() => reset()}>
+                Reset
+              </button>
+            </div>
           </div>
         </div>
       </div>
