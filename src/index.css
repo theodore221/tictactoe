@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Slackside+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Madimi+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Slackside+One&display=swap");
 
 root {
   --color-bg: #1f1f38;
@@ -15,15 +15,16 @@ root {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background: #efefef;
   padding: 0;
+  margin: 0;
 }
 
 h1 {
   margin-top: 0;
-  font-size: 5em;
-  font-family: 'Slackside One', cursive;
+  font-size: 4.5em;
+  font-family: "Slackside One", cursive;
   font-weight: 400;
   font-style: normal;
 }
@@ -73,7 +74,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .reset__btn {
@@ -85,12 +86,12 @@ ul {
   box-shadow: 0px 0px 8px #888;
   background-color: #ffba08;
 
-  font-size: 2.5em;
-  font-family: 'Slackside One', cursive;
+  font-size: 2em;
+  font-family: "Slackside One", cursive;
   font-weight: 400;
   font-style: normal;
-  width: 12rem;
-  height: 4rem;
+  width: 10rem;
+  height: 3rem;
 
   display: flex;
   align-items: center;
@@ -107,7 +108,7 @@ ul {
   text-align: center;
 
   font-size: 1.2em;
-  font-family: 'Slackside One', cursive;
+  font-family: "Slackside One", cursive;
   font-weight: 400;
   font-style: normal;
   width: 10rem;
@@ -129,10 +130,10 @@ ul {
   border: none;
   border-radius: 10%;
   box-shadow: 0px 0px 8px #888;
-  width: 8rem;
-  height: 8rem;
-  font-size: 7em;
-  font-family: 'Madimi One', sans-serif;
+  width: 5rem;
+  height: 5rem;
+  font-size: 5em;
+  font-family: "Madimi One", sans-serif;
   font-weight: 400;
   font-style: normal;
   line-height: 5rem;
@@ -151,11 +152,12 @@ ul {
 
 .square:hover {
   box-shadow: 0px 0px 15px #888;
+  /* opacity: 55%; */
 }
 
 .board-row:after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -171,20 +173,34 @@ ul {
 }
 
 .status {
-  margin-bottom: 10px;
-  font-size: 2.5em;
-  font-family: 'Slackside One', cursive;
+  margin-top: 3em;
+  margin-bottom: 0.3em;
+  font-size: 1.6em;
+  font-family: "Slackside One", cursive;
   font-weight: 400;
   font-style: normal;
   text-align: center;
   border: 2px dashed black;
   border-radius: 2%;
-  padding-bottom: 0.5em;
+  padding-bottom: 2em;
+  height: 1em;
+  width: 10em;
+
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.board__status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .game__container {
   height: 100vh;
-  background-image: url('./assets/bg1.jpg');
+  background-image: url("./assets/bg1.jpg");
   background-size: cover;
 }
 
@@ -244,7 +260,7 @@ ul {
   display: inline-block;
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     background: var(--border-bg);
     width: calc(100% * 1.41421356237);
@@ -261,7 +277,7 @@ ul {
     animation-direction: reverse;
   }
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: var(--border-size);
     background: white;
