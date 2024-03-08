@@ -180,6 +180,7 @@ ul {
   border: 2px dashed black;
   border-radius: 2%;
   padding-bottom: 0.5em;
+  transition: var(--transition);
 }
 
 .game__container {
